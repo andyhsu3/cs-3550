@@ -1,0 +1,34 @@
+<link href="/static/main.css" rel="stylesheet"/>
+
+<!-- This is the basic outline detailing our html file -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Assignment 1 (HTML) - CS 3550</title>
+<link rel="icon" type="favicon.ico" href="/static/favicon.ico">
+
+<body class="index">
+    <!-- using nav here for the navigation topbar (recycled into every .html page)-->
+    {% include "header.html" with title="Assignments" %}
+
+    <!-- i want to create another heading with the for our index page -->
+    <h2>All assignments</h2>
+
+    <!-- using a table for the assignments -->
+    <!-- they are all the same kind of objects (assignments | date | weight) -->
+    <table class="sortable">
+        <thead>
+            <tr>
+                <th class="sort-column">Assignment</th>
+                <th class="sort-column">Due date</th>
+                <th class="number sort-column">Weight</th>
+            </tr>
+        </thead>
+        {% for assignment in assignments %}
+        <tr data-index="{{ forloop.counter }}">
+            <td><a href="/{{ assignment.id }}/">{{ assignment.title }}</a></td>
+            <td data-value="{{ assignment.deadline|date:'U' }}">{{ assignment.deadline|date:"M d" }}</td>
+            <td class="number">{{ assignment.weight }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>

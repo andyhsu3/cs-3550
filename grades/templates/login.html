@@ -1,0 +1,39 @@
+<link href="/static/main.css" rel="stylesheet"/>
+
+<!-- This is the basic outline detailing our html file -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CS3550 Login</title>
+<link rel="icon" type="favicon.ico" href="/static/favicon.ico">
+
+<body class="login">
+    <!-- using nav here for the navigation topbar (recycled into every .html page)-->
+    {% include "header.html" with title="Login" %}
+    
+    <!-- i want to create another heading with the for our profile page -->
+    <h2>Log In</h2>
+
+    <!-- I want to use a form (for input) and then a table to side by side align the username/password -->
+    <div class="allInformation">
+        <form class="loginInformation" action="/profile/login/" method="post">
+            {% csrf_token %}
+            <div class="inputtedInformation">
+                <label for="usernameInput">Username:</label>
+                <input id="usernameInput" name="usernameInput" type="text" autofocus></br>
+            </div>
+            <div class="inputtedInformation">
+                <label for="passwordInput">Password:</label>
+                <!-- Password can contain any symbol, number, text, so no type -->
+                <input type="password" id="passwordInput" name="passwordInput"></br>
+            </div>
+            <input type="hidden" name="next" value="{{ next }}">
+            <div class="loginButton">
+                <button type="submit">Log in</button>
+            </div>
+
+            {% if error %}
+            <output style="color: red; font-weight: bold;">{{ error }}</output>
+            {% endif %}
+        </form>
+    </div>
+</body>

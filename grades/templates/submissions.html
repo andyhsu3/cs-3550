@@ -1,0 +1,58 @@
+<link href="/static/main.css" rel="stylesheet"/>
+
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>CS3550 Submissions</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+</head>
+<body class="submissions">
+    <!-- This allows us to dynamically add everything into our table -->
+    {% include "header.html" with title="Submissions" %}
+
+    <h2>{{ assignment.title }}</h2>
+    <article>
+        <p>All grades out of {{ assignment.points }}</p>
+    </article>
+
+    <form action="/{{ assignment.id }}/submissions" method="post">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Student</th>
+                <th>Submission</th>
+                <th>Grade</th>
+            </tr>
+            {% for submission in submissions %}
+            <tr>
+                <td><label>{{ submission.author.get_full_name }}</label></td>
+                <td>
+                    <a href="{{ submission.file.url }}" title="When you click this url, you will be led to the submission that is tied to the assignment.">{{ submission.file.name }}</a>
+                </td>
+                <td>
+                    <!-- An error that i had here was having type="number" and min and max at the end of the text. This made it impossible for my own grader because we were already -->
+                    <!-- checking for these errors in the browser itself, so I had to remove those -->
+                    <input class="grade-input" type="text" name="grade-{{ submission.id }}" value="{{ submission.score }}">
+                </td>
+                <td>
+                    {% for key, error_list in errors.items %}
+                        {% if key == submission.id %}
+                            <output class="error-output">
+                                {% for error in error_list %}
+                                    {{ error }}<br>
+                                {% endfor %}
+                            </output>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No submissions found for this assignment.</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <button type="submit">Submit</button>
+        <a class="backButton" href="/{{ assignment.id }}/">Back to Assignment</a>
+    </form>
+</body>

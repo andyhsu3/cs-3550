@@ -1,0 +1,77 @@
+<link href="/static/main.css" rel="stylesheet">
+
+<!-- profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CS3550 User Profile</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+</head>
+<body class="profile">
+    {% include "header.html" with title="Profile" %}
+
+    <h2>Your Grades</h2>
+    <div class="login-div">
+        <p>Currently logged in as {{ user.get_full_name }}.</p>
+        <p><a href="/profile/logout/">Log out</a></p>
+    </div>
+
+    {% if is_student %}
+    <!-- Student view -->
+    <!-- I was having issues with this -- so i added thead, tbody, and tfoot to differentiate what to sort. -->
+    <table class="sortable">
+        <thead>
+            <tr>
+                <th>Assignment</th>
+                <th class="scored-header sort-column">Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in profile_data %}
+            <tr data-index="{{ forloop.counter }}">
+                <td><a href="/{{ item.assignment.id }}/">{{ item.assignment.title }}</a></td>
+                <td class="scored-header" data-value="{{ item.status|default:0 }}" data-weight="{{ item.assignment.weight|default:1 }}">{{ item.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Final Grade</th>
+                <td class="scored-header">{{ current_grade }}%</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    {% elif is_ta %}
+    <!-- TA view -->
+    <table>
+        <tr>
+            <th>Assignment</th>
+            <th class="graded-header">Graded</th>
+        </tr>
+        {% for item in profile_data %}
+        <tr>
+            <td><a href="/{{ item.assignment.id }}/submissions">{{ item.assignment.title }}</a></td>
+            <td class="graded-header">{{ item.graded_submissions }} / {{ item.total_assigned_submissions }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    {% elif is_admin %}
+    <!-- Admin view -->
+    <table>
+        <tr>
+            <th>Assignment</th>
+            <th class="graded-header">Graded</th>
+        </tr>
+        {% for item in profile_data %}
+        <tr>
+            <td><a href="/{{ item.assignment.id }}/submissions">{{ item.assignment.title }}</a></td>
+            <td class="graded-header">{{ item.graded_submissions }} / {{ item.total_assigned_submissions }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+</html>

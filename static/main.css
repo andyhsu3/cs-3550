@@ -1,0 +1,358 @@
+/*Phase 2: Typography */
+
+/* Adding in fonts for text with Sans and the 3 styles */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+
+.ibm-plex-sans-regular {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+  
+.ibm-plex-sans-bold {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+}
+  
+.ibm-plex-sans-regular-italic {
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+}
+
+/* Adding in fonts for text with Mono and the 1 regular style */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+
+.ibm-plex-mono-regular {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Setting all text on the page to use IBM Plex Sans */
+body {
+    font-family: "IBM Plex Sans";
+    line-height: 1.25rem;
+}
+
+/* any source code should use IBM Plex Mono */
+code {
+    font-family: "IBM Plex Mono";
+}
+
+/* Setting table row line-height to 1.50rem */
+tr {
+    line-height: 1.50rem;
+}
+
+/* Adjusting page navigation banner */
+nav {
+    font-style: bold;
+    font-size: 1.25rem;
+}
+
+nav a{
+    font-style: normal;
+    color: darkslategray;
+    text-decoration: none;
+}
+
+/* Adjusting title */
+h2 {
+    font-size: 150%;
+}
+
+/* set description header in assignment clas to same size */
+.assignment h3 {
+    font-size: 100%;
+}
+
+/* setting all text in login to be 25% larger than default size */
+.login header, .login form{
+    font-size: 125%;
+}
+
+/* Phase 3: Styling Links, Forms, and, Tables */
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* ensure tables span the width and sets the text align to the left */
+table{
+    width: 100%;
+    text-align: left;
+}
+
+/* set every number to a class in the .html file and then here we align to right */
+.number{
+    text-align: right;
+}   
+
+/* login.html setup */
+.allInformation {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.loginInformation {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inputtedInformation {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.inputtedInformation label {
+    width: 100%;
+    text-align: left;
+}
+
+.inputtedInformation input {
+    width: 50%;
+    padding: 0.5rem;
+}
+
+.loginButton {
+    display: flex;
+    justify-content: center;
+}
+
+.login button {
+    width: 50%;
+    padding: 0.5rem;
+}
+
+.submissions studentOneGrade{
+    font-size: 100%;
+}
+
+.submissions studentTwoGrade{
+    font-size: 100%;
+}
+
+.submissions backButton{
+    size: 75%;
+}
+
+/* Phase 4: Borders, backgrounds, and whitespace */
+
+/* remove any padding from the html and body elements */
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+/* setting gray background around nav bar */ 
+nav {
+    background-color: #ddd;
+    box-shadow: 0px 0px 5px gray;
+    padding: 0.25rem 1rem;
+}
+
+/* adding in a border-bottom for page title */
+h2 {
+    border-bottom: 1px solid lightgray;
+    margin: 1rem;
+    padding: 0.5rem 0rem;
+}
+
+h2 {
+    margin-top: 3rem;
+}
+
+/* add in 1 rem of whitespace between other elements in main content (body) */
+article, img{
+    padding: 0rem 1rem;
+}
+
+.submissions .submit-grades{
+    display: flex;
+    padding: 0rem 1rem;
+    gap: 10px;
+}
+
+.assignment .text {
+    padding: 0rem 1rem;
+}
+
+/* border around other action cards*/
+.total-submission{
+    background-color: #b1c3de;
+    margin: 1rem;
+    padding: 0.25rem;
+    border: 1px solid lightgray;
+}
+
+.student-submission {
+    background-color: #b1c3de; /* Existing background color */
+    margin: 1rem; /* Existing margin */
+    padding: 0.25rem; /* Existing padding */
+}
+
+.log-in{
+    background-color: #b1c3de;
+    box-shadow: #204a87;
+    margin: 1rem;
+    padding: 0.25rem;
+}
+
+/* phase 5 */
+/* moving all of the navbar on one line */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+}
+
+nav .left-items {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.login-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: #b1c3de;
+    box-shadow: #204a87;
+    margin: 1rem;
+}
+
+.profile .left-section .right-section {
+    display: flex;
+    align-items: center;
+}
+
+.hw-div {
+    display: flex;
+    justify-content: space-between; /* separate left and right sections */
+    align-items: center;
+    margin: 1rem;
+}
+
+.assignment .current-submission p{
+    margin: 0rem 1rem;
+    padding: 0.5rem 0rem;
+}
+
+.assignment .left-section p {
+    margin: 0rem;
+}
+
+body > *{
+    max-width: 50rem;
+    width: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar-span {
+    display: flex;
+    max-width: 50rem;
+    width: 100%;
+    justify-content: space-between;
+    flex-grow: 1;
+    align-items: center;
+}
+
+.navbar-span .left-items {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.navbar-span .right-item{
+    align-items:flex-end;
+    margin-left: auto;
+}
+
+/* This is for assignment 4 css adjustments*/
+
+.student-submission-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; /* separate left and right sections */
+    align-items: flex-start;
+    margin: 1rem;
+}
+
+.student-submission-div .left-section {
+    display: flex;
+    align-items: left; /* Keeps "Submit here:" and input aligned */
+    gap: 0.5rem; /* Space between "Submit here:" and file input */
+}
+
+.student-submission-div .right-section {
+    display: flex;
+    align-items: center; /* Keeps submit button aligned */
+}
+
+.student-submission{
+    background-color: #b1c3de;
+    margin: 1rem;
+    padding: 0.25rem;
+    border: 1px solid lightgray;
+}
+
+.assignment .current-student-submission p{
+    margin: 0rem 1rem;
+    padding: 0.5rem 0rem;
+}
+
+/* Homework 4 changes here */
+output {
+    font-weight: bold;
+    color: red;
+}
+
+input[type="number"]:invalid {
+    border: 2px solid red; /* Red border for invalid input */
+}
+
+.error-output {
+    color: red;         /* Set text color to red */
+    font-weight: bold;  /* Make the text bold */
+}
+
+.grade-input{
+    max-width: 5rem;
+}
+
+/* Align the "Graded" column header and its cells to the right */
+.graded-header {
+    text-align: right;
+}
+
+/* used for students */
+.scored-header{
+    text-align: right;
+}
+
+/* HW6 Phase 3 */
+th.sort-column { 
+    cursor: pointer;
+}
+th.sort-asc::after { 
+    content: " \25b2";
+}
+th.sort-desc::after { 
+    content: " \25bc";
+}

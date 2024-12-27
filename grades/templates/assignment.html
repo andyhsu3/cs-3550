@@ -1,0 +1,93 @@
+<link href="/static/main.css" rel="stylesheet"/>
+
+<!-- This is the basic outline detailing our html file -->
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ assignment.title }} - CS 3550</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+</head>
+<body class="assignment">
+    <!-- Using nav here for the navigation topbar (recycled into every .html page) -->
+    {% include "header.html" with title=assignments.title %}
+
+    <!-- Title of the assignment -->
+    <h2>{{ assignment.title }}</h2>
+    <article>
+        <p>Due {{ assignment.deadline|date:"F d" }}, total of {{ assignment.weight }} {{ assignment.weight|pluralize:"point,points" }}</p>
+    </article>
+
+      <!-- Action Box for Students -->
+      {% if is_student %}
+      <article class="submission-status">
+          <p>{{ submission_message }}</p>
+      </article>
+      {% endif %}
+
+    {% if is_student%}
+    <!-- New Dynamic Action Card for Users -- focusing on students and anon users -->
+    <article class="student-submission">
+        <div class="current-student-submission">
+            {% if student_submission and student_submission.file %}
+                <p>Current submission: <a href="{{ student_submission.file.url }}">{{ student_submission.file.name }}</a></p>
+            {% else %}
+                <p>No current submission</p>
+            {% endif %}
+        </div>
+        <div class="student-submission-div">
+            <form action="/{{ assignment.id }}/" method="POST" enctype="multipart/form-data" class="async-form">
+                {% csrf_token %}
+                
+                {% if error_message %}
+                    <output style="color: red; font-weight: bold;">{{ error_message }}</output>
+                {% endif %}
+                <div class="left-section">
+                    <p>Submit here: <input type="file" name="file" accept="application/pdf" required></p>
+                </div>
+                <div class="right-section">
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </article>
+    {% endif %}
+
+    {% if is_ta or is_admin %}
+    <!-- Action card content only for the TAs or Admin -->
+    <article class="total-submission">
+        <div class="current-submission">
+        {% if is_admin %}
+            <p>Currently, there are a total of: {{ total_submissions }} {{ submission_plural }}</p>
+        {% else %}
+            <p>Currently {{ total_submissions }} / {{ total_students }} {{ submission_plural }}</p>
+        {% endif %}
+        </div>
+        <div class="hw-div">
+            <div class="left-section">
+            {% if is_ta %}
+                <p>{{ assigned_submissions }} {{ assigned_submission_plural }} assigned to you</p>
+            </div>
+            <div class="right-section">
+                <a href="/{{ assignment.id }}/submissions">Grade</a>
+            </div>
+            {% endif %} 
+        </div>
+    </article>
+    {% endif %}
+
+    <!-- Description of the assignment -->
+    <article>
+        <h3><strong>Description</strong></h3>
+        <div class="description">
+            <!-- Render the description as HTML -->
+            {{ assignment.description|safe }}
+        </div>
+    </article>
+
+    <!-- Error checking -->
+    {% if error %}
+    <div class="error-message">
+        {{ error }}
+    </div>
+    {% endif %}
+</body>
